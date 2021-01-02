@@ -10,7 +10,7 @@ export interface KnownBaseTheme {
   colors: {
     [key: string]: string;
   };
-  spacing: {
+  space: {
     [key: string]: number;
   };
   breakpoints: {
@@ -21,6 +21,12 @@ export interface KnownBaseTheme {
   };
   borderRadii?: {
     [key: string]: number;
+  };
+  fontSize?: {
+    [key: string]: number;
+  };
+  fontFamily?: {
+    [key: string]: string;
   };
 }
 
@@ -66,3 +72,16 @@ export type RNStyleProperty =
   | keyof ImageStyle;
 
 export type PropValue = string | number | undefined | null;
+
+export type ChangeTypeOfKey<
+  T extends NewType,
+  NewType extends Record<any, any>,
+  Keys extends keyof NewType = keyof NewType
+> = {
+  [key in keyof T]: key extends Keys ? NewType[key] : never;
+};
+
+export type Intersection<T extends Record<string, any>, U extends Record<string, any>> = Pick<
+  T,
+  Extract<keyof T, keyof U> & Extract<keyof U, keyof T>
+>;

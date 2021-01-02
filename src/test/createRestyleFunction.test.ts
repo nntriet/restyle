@@ -3,7 +3,7 @@ import {RNStyle} from '../types';
 
 const theme = {
   colors: {},
-  spacing: {},
+  space: {},
   breakpoints: {
     phone: 0,
     tablet: 376,

@@ -5,7 +5,7 @@ const theme = {
     black: '#111111',
     white: '#EEEEEE',
   },
-  spacing: {
+  space: {
     s: 8,
     m: 16,
     l: 24,

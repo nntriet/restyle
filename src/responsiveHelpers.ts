@@ -102,8 +102,9 @@ export const getResponsiveValue = <
     : propValue;
   if (transform) return transform({value: val, theme, themeKey});
   if (isThemeKey(theme, themeKey)) {
-    if (val && theme[themeKey][val as string] === undefined)
-      throw new Error(`Value '${val}' does not exist in theme['${themeKey}']`);
+    if (typeof val === 'number') return val;
+    if (val && theme[themeKey][val as string] === undefined) return val;
+    // throw new Error(`Value '${val}' does not exist in theme['${themeKey}']`);
 
     return val ? theme[themeKey][val as string] : val;
   }

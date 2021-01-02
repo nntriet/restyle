@@ -8,29 +8,29 @@ import {
   backgroundColorShorthand,
   opacity,
   layout,
-  spacing,
+  space,
   border,
   shadow,
   position,
   BackgroundColorProps,
   OpacityProps,
   LayoutProps,
-  SpacingProps,
+  SpaceProps,
   BorderProps,
   ShadowProps,
   PositionProps,
   visible,
   VisibleProps,
-  SpacingShorthandProps,
+  SpaceShorthandProps,
   BackgroundColorShorthandProps,
-  spacingShorthand,
+  spaceShorthand,
 } from './restyleFunctions';
 
 type BaseBoxProps<Theme extends BaseTheme> = BackgroundColorProps<Theme> &
   OpacityProps<Theme> &
   VisibleProps<Theme> &
   LayoutProps<Theme> &
-  SpacingProps<Theme> &
+  SpaceProps<Theme> &
   BorderProps<Theme> &
   ShadowProps<Theme> &
   PositionProps<Theme>;
@@ -40,7 +40,7 @@ export type BoxProps<
   EnableShorthand extends boolean = true
 > = BaseBoxProps<Theme> & EnableShorthand extends true
   ? BaseBoxProps<Theme> &
-      SpacingShorthandProps<Theme> &
+      SpaceShorthandProps<Theme> &
       BackgroundColorShorthandProps<Theme>
   : BaseBoxProps<Theme>;
 
@@ -50,8 +50,8 @@ export const boxRestyleFunctions = [
   opacity,
   visible,
   layout,
-  spacing,
-  spacingShorthand,
+  space,
+  spaceShorthand,
   border,
   shadow,
   position,

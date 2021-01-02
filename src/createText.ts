@@ -6,18 +6,18 @@ import {BaseTheme, RestyleFunctionContainer} from './types';
 import {
   color,
   opacity,
-  spacing,
+  space,
   typography,
   textShadow,
   visible,
   ColorProps,
   OpacityProps,
-  SpacingProps,
+  SpaceProps,
   TextShadowProps,
   TypographyProps,
   VisibleProps,
-  spacingShorthand,
-  SpacingShorthandProps,
+  spaceShorthand,
+  SpaceShorthandProps,
 } from './restyleFunctions';
 import createVariant, {VariantProps} from './createVariant';
 
@@ -25,7 +25,7 @@ type BaseTextProps<Theme extends BaseTheme> = ColorProps<Theme> &
   OpacityProps<Theme> &
   VisibleProps<Theme> &
   TypographyProps<Theme> &
-  SpacingProps<Theme> &
+  SpaceProps<Theme> &
   TextShadowProps<Theme> &
   VariantProps<Theme, 'textVariants'>;
 
@@ -33,7 +33,7 @@ export type TextProps<
   Theme extends BaseTheme,
   EnableShorthand extends boolean = true
 > = EnableShorthand extends true
-  ? BaseTextProps<Theme> & SpacingShorthandProps<Theme>
+  ? BaseTextProps<Theme> & SpaceShorthandProps<Theme>
   : BaseTextProps<Theme>;
 
 export const textRestyleFunctions = [
@@ -41,8 +41,8 @@ export const textRestyleFunctions = [
   opacity,
   visible,
   typography,
-  spacing,
-  spacingShorthand,
+  space,
+  spaceShorthand,
   textShadow,
   createVariant({themeKey: 'textVariants'}),
 ];

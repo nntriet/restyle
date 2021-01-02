@@ -6,8 +6,8 @@ import createRestyleComponent from '../createRestyleComponent';
 import {
   backgroundColor,
   BackgroundColorProps,
-  SpacingProps,
-  spacing,
+  SpaceProps,
+  space,
   OpacityProps,
   opacity,
 } from '../restyleFunctions';
@@ -17,7 +17,7 @@ const theme = {
   colors: {
     coral: '#FFE6E4',
   },
-  spacing: {},
+  space: {},
   breakpoints: {
     phone: 0,
     tablet: 376,
@@ -40,11 +40,11 @@ jest.mock('react-native/Libraries/Utilities/Dimensions', () => {
 });
 const Component = createRestyleComponent<
   BackgroundColorProps<Theme> &
-    SpacingProps<Theme> &
+    SpaceProps<Theme> &
     OpacityProps<Theme> &
     ViewProps,
   Theme
->([backgroundColor, spacing, opacity]);
+>([backgroundColor, space, opacity]);
 
 describe('createRestyleComponent', () => {
   describe('creates a component that', () => {

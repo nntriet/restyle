@@ -5,7 +5,7 @@ const theme = {
   colors: {
     black: '#111111',
   },
-  spacing: {
+  space: {
     m: 16,
   },
   breakpoints: {},
@@ -19,7 +19,7 @@ const dimensions = {
 describe('composeRestyleFunctions', () => {
   const restyleFunctions = [
     createRestyleFunction({property: 'color', themeKey: 'colors'}),
-    createRestyleFunction({property: 'margin', themeKey: 'spacing'}),
+    createRestyleFunction({property: 'margin', themeKey: 'space'}),
   ];
 
   it('composes multiple restyleFunctions into one', () => {

@@ -4,7 +4,7 @@ import createRestyleFunction from './createRestyleFunction';
 import {BaseTheme, ResponsiveValue, RNStyleProperty} from './types';
 import {getKeys} from './typeHelpers';
 
-const spacingProperties = {
+const spaceProperties = {
   margin: true,
   marginTop: true,
   marginRight: true,
@@ -25,7 +25,7 @@ const spacingProperties = {
   paddingEnd: true,
 };
 
-const spacingPropertiesShorthand = {
+const spacePropertiesShorthand = {
   m: 'margin',
   mt: 'marginTop',
   mr: 'marginRight',
@@ -47,8 +47,6 @@ const spacingPropertiesShorthand = {
 };
 
 const typographyProperties = {
-  fontFamily: true,
-  fontSize: true,
   fontStyle: true,
   fontWeight: true,
   letterSpacing: true,
@@ -161,32 +159,42 @@ export const visible = createRestyleFunction({
   transform: ({value}) => (value === false ? 'none' : 'flex'),
 });
 
-export const spacing = getKeys(spacingProperties).map(property => {
+export const space = getKeys(spaceProperties).map(property => {
   return createRestyleFunction({
     property,
-    themeKey: 'spacing',
+    themeKey: 'space',
   });
 });
 
-export const spacingShorthand = getKeys(spacingPropertiesShorthand).map(
+export const spaceShorthand = getKeys(spacePropertiesShorthand).map(
   property => {
-    const styleProperty = spacingPropertiesShorthand[
+    const styleProperty = spacePropertiesShorthand[
       property
     ] as RNStyleProperty;
 
     return createRestyleFunction({
       property,
       styleProperty,
-      themeKey: 'spacing',
+      themeKey: 'space',
     });
   },
 );
 
-export const typography = getKeys(typographyProperties).map(property => {
-  return createRestyleFunction({
-    property,
-  });
-});
+export const typography = [
+  ...getKeys(typographyProperties).map((property) => {
+    return createRestyleFunction({
+      property,
+    });
+  }),
+  createRestyleFunction({
+    property: 'fontSize',
+    themeKey: 'fontSize',
+  }),
+  createRestyleFunction({
+    property: 'fontFamily',
+    themeKey: 'fontFamily',
+  }),
+]
 
 export const layout = getKeys(layoutProperties).map(property => {
   return createRestyleFunction({
@@ -255,8 +263,8 @@ export const all = [
   opacity,
   backgroundColor,
   backgroundColorShorthand,
-  ...spacing,
-  ...spacingShorthand,
+  ...space,
+  ...spaceShorthand,
   ...typography,
   ...layout,
   ...position,
@@ -284,25 +292,25 @@ export interface BackgroundColorShorthandProps<Theme extends BaseTheme> {
   bg?: ResponsiveValue<keyof Theme['colors'], Theme>;
 }
 
-export type SpacingProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof spacingProperties]?: ResponsiveValue<
-    keyof Theme['spacing'],
+export type SpaceProps<Theme extends BaseTheme> = {
+  [Key in keyof typeof spaceProperties]?: ResponsiveValue<
+    keyof Theme['space'],
     Theme
   >;
 };
 
-export type SpacingShorthandProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof spacingPropertiesShorthand]?: ResponsiveValue<
-    keyof Theme['spacing'],
+export type SpaceShorthandProps<Theme extends BaseTheme> = {
+  [Key in keyof typeof spacePropertiesShorthand]?: ResponsiveValue<
+    keyof Theme['space'],
     Theme
   >;
 };
 
 export type TypographyProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof typographyProperties]?: ResponsiveValue<
-    TextStyle[Key],
-    Theme
-  >;
+  [Key in keyof typeof typographyProperties]?: ResponsiveValue<TextStyle[Key], Theme>;
+} & {
+  fontSize?: ResponsiveValue<keyof Theme['fontSize'], Theme>;
+  fontFamily?: ResponsiveValue<keyof Theme['fontFamily'], Theme>;
 };
 
 export type LayoutProps<Theme extends BaseTheme> = {
@@ -365,8 +373,8 @@ export type AllProps<Theme extends BaseTheme> = BackgroundColorProps<Theme> &
   BackgroundColorShorthandProps<Theme> &
   ColorProps<Theme> &
   OpacityProps<Theme> &
-  SpacingProps<Theme> &
-  SpacingShorthandProps<Theme> &
+  SpaceProps<Theme> &
+  SpaceShorthandProps<Theme> &
   TypographyProps<Theme> &
   LayoutProps<Theme> &
   PositionProps<Theme> &

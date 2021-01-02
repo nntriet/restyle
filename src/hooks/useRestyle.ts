@@ -7,6 +7,9 @@ import {getKeys} from '../typeHelpers';
 
 import useDimensions from './useDimensions';
 import useTheme from './useTheme';
+import useDeepMemo from './useDeepMemo';
+import {AllProps} from '../restyleFunctions';
+import {ChangeTypeOfKey, Intersection} from '../types'
 
 const filterRestyleProps = <
   TRestyleProps,
@@ -37,12 +40,13 @@ const filterRestyleProps = <
 const useRestyle = <
   Theme extends BaseTheme,
   TRestyleProps extends Record<string, any>,
-  TProps extends TRestyleProps & {style?: StyleProp<RNStyle>}
+  TProps extends TRestyleProps,
+  T = undefined
 >(
   restyleFunctions: (
     | RestyleFunctionContainer<TRestyleProps, Theme>
     | RestyleFunctionContainer<TRestyleProps, Theme>[])[],
-  props: TProps,
+  props: TProps & { style?: T },
 ) => {
   const theme = useTheme<Theme>();
 
@@ -58,9 +62,16 @@ const useRestyle = <
     props,
     composedRestyleFunction.properties,
   );
-
-  (cleanProps as TProps).style = [style, props.style].filter(Boolean);
-  return cleanProps;
+  return useDeepMemo(
+    () =>
+      (({
+        ...cleanProps,
+        style: props.style ? [style, props.style].filter(Boolean) : style,
+      } as any) as Omit<typeof cleanProps, 'style'> & {
+        style: T extends undefined ? ChangeTypeOfKey<Intersection<AllProps<Theme>, TProps>, RNStyle> : StyleProp<RNStyle>;
+      }),
+    [cleanProps, style, props.style],
+  );;
 };
 
 export default useRestyle;
