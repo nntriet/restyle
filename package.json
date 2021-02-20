@@ -27,9 +27,6 @@
     "type": "git",
     "url": "git+https://github.com/Shopify/restyle.git"
   },
-  "dependencies": {
-    "react-fast-compare": "^3.2.0"
-  },
   "devDependencies": {
     "@shopify/eslint-plugin": "^37.0.0",
     "@types/jest": "^24.0.18",
@@ -49,7 +46,8 @@
   },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "react-native": ">=0.59.0"
+    "react-native": ">=0.59.0",
+    "react-fast-compare": ">=3.2.0"
   },
   "files": [
     "dist/*"
