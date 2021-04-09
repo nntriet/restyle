@@ -294,14 +294,14 @@ export interface BackgroundColorShorthandProps<Theme extends BaseTheme> {
 
 export type SpaceProps<Theme extends BaseTheme> = {
   [Key in keyof typeof spaceProperties]?: ResponsiveValue<
-    keyof Theme['space'],
+    keyof Theme['space'] | number,
     Theme
   >;
 };
 
 export type SpaceShorthandProps<Theme extends BaseTheme> = {
   [Key in keyof typeof spacePropertiesShorthand]?: ResponsiveValue<
-    keyof Theme['space'],
+    keyof Theme['space'] | number,
     Theme
   >;
 };
@@ -309,7 +309,7 @@ export type SpaceShorthandProps<Theme extends BaseTheme> = {
 export type TypographyProps<Theme extends BaseTheme> = {
   [Key in keyof typeof typographyProperties]?: ResponsiveValue<TextStyle[Key], Theme>;
 } & {
-  fontSize?: ResponsiveValue<keyof Theme['fontSize'], Theme>;
+  fontSize?: ResponsiveValue<keyof Theme['fontSize'] | number, Theme>;
   fontFamily?: ResponsiveValue<keyof Theme['fontFamily'], Theme>;
 };
 
